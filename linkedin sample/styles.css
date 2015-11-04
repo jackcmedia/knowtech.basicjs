@@ -1,0 +1,87 @@
+body {
+	background: #EEE;
+}
+
+.icon {
+	font-family: fontAwesome;
+	font-size: 1rem;
+}
+
+#siteHeader {
+	display: flex;
+	
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	
+	padding: 10px 0;
+	
+	background: linear-gradient(to bottom, #7d7d7d 0%,#0e0e0e 100%);
+}
+#siteHeader img {
+	width: 4vw;
+	height: 4vw;
+	
+	margin-left: 2vw;
+	margin-right: 2vw;
+}
+
+#siteHeader #siteHeaderItems {
+	display: flex;
+	flex-flow: column nowrap;
+	
+	justify-content: space-around;
+}
+
+#siteHeader #siteHeaderItems #globalTopBar {
+	display: flex;
+	
+	width: 86vw;
+}
+
+#siteHeader #siteHeaderItems #globalTopBar #globalSearchBox {
+	width: 20vw;
+}
+
+#siteHeader #siteHeaderItems #globalTopBar #globalSearchBox input[type="text"] {
+	height: 2vw;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-radius: 4px;
+	box-shadow: 0 0 14px #aaa inset;
+}
+
+#siteHeader #siteHeaderItems #globalTopBar #globalSearchBox  button{
+    border: 2px solid #499bea;
+    border-radius: 3px;
+	
+    width: 4vw;
+    height: 2vw;
+	
+    background: linear-gradient(to bottom, #499bea 0%,#166ba3 100%);
+	color: white;
+}
+
+#siteHeader #siteHeaderItems #globalTopBar #globalActions {
+	width: 25vw;
+}
+
+#siteHeader #siteHeaderItems #globalTopBar #globalActions button {
+	color: white;
+	font-size: 1.7rem;
+	border:none;
+	background:none;
+	transition: all 3s ease;
+}
+
+#siteHeader #siteHeaderItems #globalTopBar #globalActions button:hover {
+	background-color: #444;
+	border-radius: 4px;
+	transition: all 0.5s ease;
+	transform: translateY(-5px);
+}
+
+#siteHeader #siteHeaderItems #globalMenu {
+	background: linear-gradient(to bottom, #262626 0%,#0e0e0e 100%);
+}
