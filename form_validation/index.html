@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Form Validation</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="form.js">
+</script>
+    </head>
+    <body>
+        <script id="tooltipTemplate" type="template">
+            <div class="tooltip">
+                <span class="tooltipText"></span>
+            </div>
+        </script>
+        <form id="registrationForm">
+            <div>
+                <div id="usernameRow" class="field">
+                    <label id="usernameLabel">User name: </label>
+                    <input id="usernameField" type="text" placeholder="Name..." />
+                </div>
+
+                <div id="passwordRow" class="field">
+                    <label id="passwordLabel">Password: </label>
+                    <input id="passwordField" type="password" />
+                </div>
+
+                <div id="repeatPassRow" class="field">
+                    <label id="repeatPassLabel">Re-enter password: </label>
+                    <input id="repeatPassField" type="password" />
+                </div>
+
+                <div id="emailRow" class="field">
+                    <label id="emailLabel">E-mail address: </label>
+                    <input id="emailField" type="text" placeholder="user@example.com" />
+                </div>
+
+                <div id="eulaRow" class="field">
+                    <label id="eulaLabel">Do you accept the End User License Agreement?</label>
+                    <input id="eulaCheck" type="checkbox" />
+                </div>
+            </div>
+
+            <div id="actionsRow">
+                <button id="submitButton">Submit</button>
+                <button id="clearButton">Clear</button>
+            </div>
+        </form>
+    </body>
+</html>
