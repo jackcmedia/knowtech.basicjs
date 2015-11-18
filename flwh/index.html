@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script>
+			document.addEventListener("DOMContentLoaded", function() {
+				var textElements = document.querySelectorAll(".text");
+
+				for (var i = 0; i < textElements.length; i++) {
+					textElements[i].classList.add("important");
+				}
+			});
+		</script>
+
+		<style type="text/css">
+			.text {
+
+			}
+
+			.important {
+				font-weight: bold;
+				font-size 1.2em;
+			}
+		</style>
+	</head>
+
+	<body>
+		<p class="text">Hello World</p>
+		<p>Hello World</p>
+		<p class="text">Hello World</p>
+		<p class="text">Hello World</p>
+		<p>Hello World</p>
+		<p>Hello World</p>
+		<p class="text">Hello World</p>
+		<p class="text">Hello World</p>
+		<p>Hello World</p>
+		<p class="text">Hello World</p>
+	</body>
+</html>
