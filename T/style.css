@@ -1,0 +1,101 @@
+body {
+	margin: 0;
+	border: 0;
+	padding: 0;
+	background-color: black;
+}
+
+#wrapper {
+	height: 100vh;
+
+	display: flex;
+
+	justify-content: center;
+	align-items: center;
+}
+
+#bucket {
+	border: 1vh solid white;
+	border-top: 1vh solid grey;
+
+	display: inline-block;
+	width: 35vh;
+
+	border-radius: 1vh;
+}
+
+/* -------------------------------------------------------------------------- */
+
+.cell {
+	float: left;
+
+	height: 3.5vh;
+	width: 3.5vh;
+
+	box-sizing: border-box;
+	padding: 1px;
+
+}
+
+.cell .mino {
+
+	border-radius: 1vh;
+	width: 100%;
+	height: 100%;
+
+}
+
+.cell .cyan {
+	background-color: cyan;
+}
+
+.cell .yellow {
+	background-color: yellow;
+}
+
+.cell .purple {
+	background-color: purple;
+}
+
+.cell .green {
+	background-color: green;
+}
+
+.cell .red {
+	background-color: red;
+}
+
+.cell .blue {
+	background-color: blue;
+}
+
+.cell .orange {
+	background-color: orangered;
+}
+
+/* -------------------------------------------------------------------------- */
+
+.cell:nth-of-type(20n+1),
+.cell:nth-of-type(20n+3),
+.cell:nth-of-type(20n+5),
+.cell:nth-of-type(20n+7),
+.cell:nth-of-type(20n+9),
+.cell:nth-of-type(20n+12),
+.cell:nth-of-type(20n+14),
+.cell:nth-of-type(20n+16),
+.cell:nth-of-type(20n+18),
+.cell:nth-of-type(20n+20) {
+	background-color: #444444;
+}
+
+/*
+
+Cyan I
+Yellow O
+Purple T
+Green S
+Red Z
+Blue J
+Orange L
+
+*/
