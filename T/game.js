@@ -4,7 +4,7 @@ var Game = {
 	bucketWidth: 10,
 	bucketHeight: 22,
 
-	fps: 10,
+	fps: 30,
 	intervalID: 0,
 
 	minoI: 1,
@@ -14,6 +14,9 @@ var Game = {
 	minoZ: 5,
 	minoJ: 6,
 	minoL: 7,
+
+	posX: 0,
+	posY: 0,
 
 	initialize: function() {
 
@@ -48,11 +51,8 @@ var Game = {
 
 	update: function() {
 
-		var row = Math.floor(Math.random() * Game.bucketHeight);
-		var column = Math.floor(Math.random() * Game.bucketWidth);
-		var color = Math.floor(Math.random() * 7) + 1;
-
-		this.bucketData[row][column] = color;
+		this.posX = (this.posX + this.bucketWidth) % this.bucketWidth;
+		this.posY = (this.posY + this.bucketHeight) % this.bucketHeight;
 
 	},
 
@@ -69,39 +69,45 @@ var Game = {
 				node.className = "cell";
 				var innerNode = document.createElement("div");
 
-				switch (this.bucketData[i][j]) {
+				if (i == this.posY && j == this.posX) {
+					innerNode.className = "mino cyan";
+				} else {
 
-					case Game.minoI:
-						innerNode.className = "mino cyan";
-						break;
+					switch (this.bucketData[i][j]) {
 
-					case Game.minoO:
-						innerNode.className = "mino yellow";
-						break;
+						case Game.minoI:
+							innerNode.className = "mino cyan";
+							break;
 
-					case Game.minoT:
-						innerNode.className = "mino purple";
-						break;
+						case Game.minoO:
+							innerNode.className = "mino yellow";
+							break;
 
-					case Game.minoS:
-						innerNode.className = "mino green";
-						break;
+						case Game.minoT:
+							innerNode.className = "mino purple";
+							break;
 
-					case Game.minoZ:
-						innerNode.className = "mino red";
-						break;
+						case Game.minoS:
+							innerNode.className = "mino green";
+							break;
 
-					case Game.minoJ:
-						innerNode.className = "mino blue";
-						break;
+						case Game.minoZ:
+							innerNode.className = "mino red";
+							break;
 
-					case Game.minoL:
-						innerNode.className = "mino orange";
-						break;
+						case Game.minoJ:
+							innerNode.className = "mino blue";
+							break;
 
-					default:
-						innerNode.className = "mino";
-						break;
+						case Game.minoL:
+							innerNode.className = "mino orange";
+							break;
+
+						default:
+							innerNode.className = "mino";
+							break;
+					}
+
 				}
 
 				node.appendChild(innerNode);
@@ -114,6 +120,23 @@ var Game = {
 
 	}
 
+};
+
+document.onkeydown = function(e) {
+    switch (e.keyCode) {
+        case 37:
+            Game.posX -= 1;
+            break;
+        case 38:
+            Game.posY -= 1;
+            break;
+        case 39:
+            Game.posX += 1;
+            break;
+        case 40:
+            Game.posY += 1;
+            break;
+    }
 };
 
 Game.initialize();
