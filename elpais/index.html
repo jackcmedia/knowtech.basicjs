@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>El Pais</title>
+		<link rel="stylesheet" href="style.css">
+		<script src="http://code.jquery.com/jquery-2.1.4.js"></script>
+		<script>
+			document.addEventListener("DOMContentLoaded", function() {
+				var blogPostTemplate = document.getElementById("blogPostTemplate");
+				var blogPostSection = document.getElementById("blogPosts");
+
+				blogPostSection.removeChild(blogPostTemplate);
+
+				$.getJSON("posts.json").done(function(posts) {
+					
+					for (var i = 0; i < posts.length; i++) {
+						var node = blogPostTemplate.cloneNode(true);
+
+						var nodeTitle = node.querySelector(".blogPostTitle");
+						var nodeAuthor = node.querySelector(".blogPostAuthor");
+						var nodeBody = node.querySelector(".blogPostBody");
+
+						nodeTitle.textContent = posts[i].title;
+						nodeAuthor.textContent = posts[i].author;
+						nodeBody.textContent = posts[i].body;
+
+						blogPostSection.appendChild(node);
+					}
+
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<script type"articleTemplate">
+		</script>
+		<div id="outerWrapper">
+			<header id="siteHeader">
+				<div id="siteHeaderTopMenu">
+					<div id="siteHeaderTopLeftMenu">
+						<label id="siteHeaderDate">Today</label>
+						<label id="siteHeaderLastUpdate">Today</label>
+						<button id="siteHeaderHemerotecaButton">Hemeroteca</button>
+					</div>
+
+					<div id="siteHeaderTopCenterMenu">
+						<button id="siteHeaderEspanaButton">ESPAÑA</button>
+						<button id="siteHeaderAmericaButton">AMÉRICA</button>
+						<button id="siteHeaderBrasilButton">BRASIL</button>
+						<button id="siteHeaderCataloniaButton">CATALUÑA</button>
+					</div>
+
+					<div id="siteHeaderTopRightMenu">
+						<button id="siteHeaderSessionButton">INICIA SESIÓN</button>
+						<button id="siteHeaderRegisterButton">REGÍSTRATE</button>
+						<button id="siteHeaderSubscribeButton">SUSCRÍBETE</button>
+						<button id="siteHeaderSearchButton">BUSCADOR</button>
+					</div>
+				</div>
+
+				<div id="siteHeaderLogo">
+					<a href="index.html">
+						<img src="http://elpais.com/iconos/v1.x/v1.4/logos/cabecera_portada.svg" alt="EL PAÍS"></img>
+					</a>
+				</div>
+
+				<div id="siteHeaderBottomMenu">
+					<button id="">INTERNACIONAL</button>
+					<button id="">OPINIÓN</button>
+					<button id="">ESPAÑA</button>
+					<button id="">ECONOMÍA</button>
+					<button id="">CIENCIA</button>
+					<button id="">TECNOLOGÍA</button>
+					<button id="">CULTURA</button>
+					<button id="">ESTILO</button>
+					<button id="">DEPORTES</button>
+					<button id="">TELEVISIÓN</button>
+					<button id="">VÍDEO</button>
+				</div>
+			</header>
+
+			<section id="blogPosts">
+				<article id="blogPostTemplate">
+					<h2 class="blogPostTitle"></h2>
+					<aside>
+						<span class="blogPostAuthor"></span>
+					</aside>
+					<section class="blogPostBody"></section
+				</article>
+			</section>
+
+			<footer id="siteFooter">
+				&copy; My Blog
+			</footer>
+		</div>
+	</body>
+</html>

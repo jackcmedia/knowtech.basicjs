@@ -1,0 +1,106 @@
+#outerWrapper {
+
+	position: absolute;
+	height: 100%;
+
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+
+	border-left: 1px solid lightgray;
+	border-right: 1px solid lightgray;
+	margin-left: 12.5vw;
+	margin-right: 12.5vw;
+	padding-left: 10px;
+	padding-right: 10px;
+
+}
+
+#siteHeader button {
+
+	border: none;
+	background: none;
+
+}
+
+#siteHeader label,
+#siteHeader button {
+	font-size: 0.7em;
+}
+
+#siteHeaderTopMenu {
+
+	border-bottom: 1px solid gray;
+	padding-top: 5px;
+	padding-bottom: 5px;
+
+	display: flex;
+	justify-content: space-between;
+
+}
+
+#siteHeaderTopLeftMenu {
+
+	display:flex;
+
+}
+
+#siteHeaderTopLeftMenu * {
+
+	padding-left: 5px;
+	padding-right: 5px;
+
+}
+
+#siteHeaderTopLeftMenu *:first-child {
+
+	border-left: none;
+	padding-left: none;
+
+}
+
+#siteHeaderTopCenterMenu {
+
+	display:flex;
+
+}
+
+#siteHeaderTopCenterMenu * {
+
+	padding-left: 5px;
+	padding-right: 5px;
+
+}
+
+#siteHeaderTopCenterMenu *:first-child {
+
+	padding-left: none;
+
+}
+
+#siteHeaderTopCenterMenu *:last-child {
+
+	padding-right: none;
+
+}
+
+#siteHeaderLogo {
+
+	text-align: center;
+	padding: 10px;
+
+}
+
+#siteHeaderBottomMenu {
+
+	border-top: 1px solid gray;
+	padding-top: 5px;
+	padding-bottom: 5px;
+
+	background-color: #F3F3F3;
+
+	display: flex;
+	justify-content: space-around;
+
+}
