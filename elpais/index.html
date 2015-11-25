@@ -3,38 +3,68 @@
 	<head>
 		<meta charset="utf-8">
 		<title>El Pais</title>
+		<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300italic,300,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="style.css">
 		<script src="http://code.jquery.com/jquery-2.1.4.js"></script>
 		<script>
-			document.addEventListener("DOMContentLoaded", function() {
-				var blogPostTemplate = document.getElementById("blogPostTemplate");
-				var blogPostSection = document.getElementById("blogPosts");
+			var ArticleManager = {
 
-				blogPostSection.removeChild(blogPostTemplate);
+				template: null,
+
+				addNew: function(post) {
+
+					var blogPostSection = document.getElementById("blogPosts");
+
+					if (this.template == null) {
+
+						this.template = document.getElementById("blogPostTemplate");
+						blogPostSection.removeChild(this.template);
+
+					}
+
+					var node = this.template.cloneNode(true);
+
+					var nodeTitle = node.querySelector(".blogPostTitle");
+					var nodeAuthor = node.querySelector(".blogPostAuthor");
+					var nodeBody = node.querySelector(".blogPostBody");
+					var nodeRating = node.querySelector(".blogPostRating");
+
+					nodeTitle.textContent = post.title;
+					nodeAuthor.textContent = post.author;
+					nodeBody.textContent = post.body;
+
+					var starImageElementTemplate = document.createElement("img");
+					starImageElementTemplate.classList.add("blogPostRatingStar");
+					starImageElementTemplate.src = "/images/star.png";
+
+					for (var i = 0; i < post.stars; i++) {
+
+						var starImageElement = starImageElementTemplate.cloneNode(true);
+						nodeRating.appendChild(starImageElement);
+
+					}
+
+					blogPostSection.appendChild(node);
+
+				}
+
+			};
+
+			document.addEventListener("DOMContentLoaded", function() {
 
 				$.getJSON("posts.json").done(function(posts) {
-					
-					for (var i = 0; i < posts.length; i++) {
-						var node = blogPostTemplate.cloneNode(true);
 
-						var nodeTitle = node.querySelector(".blogPostTitle");
-						var nodeAuthor = node.querySelector(".blogPostAuthor");
-						var nodeBody = node.querySelector(".blogPostBody");
+					posts.forEach(function(post) {
 
-						nodeTitle.textContent = posts[i].title;
-						nodeAuthor.textContent = posts[i].author;
-						nodeBody.textContent = posts[i].body;
+						ArticleManager.addNew(post);
 
-						blogPostSection.appendChild(node);
-					}
+					});
 
 				});
 			});
 		</script>
 	</head>
 	<body>
-		<script type"articleTemplate">
-		</script>
 		<div id="outerWrapper">
 			<header id="siteHeader">
 				<div id="siteHeaderTopMenu">
@@ -80,15 +110,18 @@
 				</div>
 			</header>
 
-			<section id="blogPosts">
-				<article id="blogPostTemplate">
-					<h2 class="blogPostTitle"></h2>
-					<aside>
-						<span class="blogPostAuthor"></span>
-					</aside>
-					<section class="blogPostBody"></section
-				</article>
-			</section>
+			<div id="content">
+				<section id="blogPosts">
+					<article id="blogPostTemplate">
+						<h2 class="blogPostTitle"></h2>
+						<aside>
+							<span class="blogPostAuthor"></span>
+							<div class="blogPostRating"></div>
+						</aside>
+						<section class="blogPostBody"></section
+					</article>
+				</section>
+			</div>
 
 			<footer id="siteFooter">
 				&copy; My Blog
