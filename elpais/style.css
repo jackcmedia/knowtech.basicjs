@@ -160,3 +160,22 @@ body {
 	height: 20px;
 
 }
+
+/*
+			<div id="content">
+				<section id="blogPosts">
+					<article id="blogPostTemplate">
+						<h2 class="blogPostTitle"></h2>
+						<aside>
+							<span class="blogPostAuthor"></span>
+							<div class="blogPostRating"></div>
+						</aside>
+						<section class="blogPostBody"></section
+						<aside class="blogPostComment">
+							<span class="blogPostCommentAuthor"></span>
+							<span class="blogPostCommentBody"></span>
+						</aside>
+					</article>
+				</section>
+			</div>
+*/

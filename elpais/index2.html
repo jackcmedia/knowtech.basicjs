@@ -6,82 +6,35 @@
 		<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300italic,300,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="style.css">
 		<script src="http://code.jquery.com/jquery-2.1.4.js"></script>
+		<script src="/bower_components/knockout/dist/knockout.js"></script>
 		<script>
-			var ArticleManager = {
 
-				template: null,
+			var model = {
 
-				addNew: function(post) {
+				posts: ko.observableArray(),
 
-					var blogPostSection = document.getElementById("blogPosts");
-
-					if (this.template == null) {
-
-						this.template = document.getElementById("blogPostTemplate");
-						blogPostSection.removeChild(this.template);
-
-					}
-
-					var node = this.template.cloneNode(true);
-
-					var nodeTitle = node.querySelector(".blogPostTitle");
-					var nodeAuthor = node.querySelector(".blogPostAuthor");
-					var nodeBody = node.querySelector(".blogPostBody");
-					var nodeRating = node.querySelector(".blogPostRating");
-
-					nodeTitle.textContent = post.title;
-					nodeAuthor.textContent = post.author;
-					nodeBody.textContent = post.body;
-
-					var starImageElementTemplate = document.createElement("img");
-					starImageElementTemplate.classList.add("blogPostRatingStar");
-					starImageElementTemplate.src = "/images/star.png";
-
-					for (var i = 0; i < post.stars; i++) {
-
-						var starImageElement = starImageElementTemplate.cloneNode(true);
-						nodeRating.appendChild(starImageElement);
-
-					}
-
-					// Append comments
-					post.comments.forEach(function(comment) {
-
-						var nodeComments = document.createElement("aside");
-						nodeComments.classList.add("blogPostComment");
-
-						var commentAuthor = document.createElement("span");
-						commentAuthor.classList.add("blogPostCommentAuthor");
-						commentAuthor.textContent = comment.author;
-						nodeComments.appendChild(commentAuthor);
-
-						var commentBody = document.createElement("span");
-						commentBody.classList.add("blogPostCommentBody");
-						commentBody.textContent = comment.comment;
-						nodeComments.appendChild(commentBody);
-
-						node.appendChild(nodeComments);
-
-					});
-
-					blogPostSection.appendChild(node);
-
+				drop: function() {
+					model.posts.splice(model.posts().indexOf(this), 1);
 				}
 
 			};
 
-			document.addEventListener("DOMContentLoaded", function() {
+			document.addEventListener("DOMContentLoaded", function () {
 
-				$.getJSON("posts.json").done(function(posts) {
+				$.getJSON("/posts.json").done(function(posts) {
 
-					posts.forEach(function(post) {
+					posts.forEach(function (post) {
 
-						ArticleManager.addNew(post);
+						model.posts.push(post);
 
 					});
 
 				});
+
+				ko.applyBindings(model, document.getElementById("content"));
+
 			});
+
 		</script>
 	</head>
 	<body>
@@ -131,14 +84,22 @@
 			</header>
 
 			<div id="content">
-				<section id="blogPosts">
+				<section id="blogPosts" data-bind="foreach: posts">
 					<article id="blogPostTemplate">
-						<h2 class="blogPostTitle"></h2>
+						<button data-bind="click: $root.drop">Drop</button>
+						<h2 class="blogPostTitle" data-bind="text: title"></h2>
 						<aside>
-							<span class="blogPostAuthor"></span>
-							<div class="blogPostRating"></div>
+							<span class="blogPostAuthor" data-bind="text: author"></span>
+							<div class="blogPostRating" data-bind="foreach: new Array(stars)">
+								<img class="blogPostRatingStar" src="/images/star.png">
+							</div>
 						</aside>
-						<section class="blogPostBody"></section>
+						<section class="blogPostBody" data-bind="text: body"></section>
+						<h3>Comments</h3>
+						<section class="blogPostComments" data-bind="foreach: comments">
+							<span class="commentAuthor" data-bind="text: author"></span>
+							<section class="commentBody" data-bind="text: comment"></section>
+						</section>
 					</article>
 				</section>
 			</div>
