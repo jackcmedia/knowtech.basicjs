@@ -161,6 +161,22 @@ body {
 
 }
 
+textarea.blogPostBody.read-only {
+	display: none;
+}
+
+section.blogPostBody.read-only {
+	display: block;
+}
+
+textarea.blogPostBody.editable {
+	display: block;
+}
+
+section.blogPostBody.editable {
+	display: none;
+}
+
 /*
 			<div id="content">
 				<section id="blogPosts">

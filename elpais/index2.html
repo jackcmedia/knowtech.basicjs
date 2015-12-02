@@ -7,11 +7,43 @@
 		<link rel="stylesheet" href="style.css">
 		<script src="http://code.jquery.com/jquery-2.1.4.js"></script>
 		<script src="/bower_components/knockout/dist/knockout.js"></script>
+		<script src="/bower_components/moment/moment.js"></script>
 		<script>
 
 			var model = {
 
 				posts: ko.observableArray(),
+
+				reorderButtonText: ko.observable("Sort: Ascending"),
+				currentOrder: "desc",
+
+				startEditingPost: function(post) {
+					post.editable(true);
+				},
+
+				stopEditingPost: function(post) {
+					post.editable(false);
+				}
+
+				reorder: function() {
+
+					switch(this.currentOrder) {
+						case "desc":
+
+							this.posts.sort(function(prev, next) {return prev.date - next.date;});
+							this.currentOrder = "asc";
+							this.reorderButtonText("Sort: Descending");
+							break;
+						case "asc":
+
+							this.posts.sort(function(prev, next) {return next.date - prev.date;});
+							this.currentOrder = "desc";
+							this.reorderButtonText("Sort: Ascending");
+
+							break;
+					}
+
+				},
 
 				drop: function() {
 					model.posts.splice(model.posts().indexOf(this), 1);
@@ -23,8 +55,11 @@
 
 				$.getJSON("/posts.json").done(function(posts) {
 
+					posts.sort(function(prev, next) {return next.date - prev.date;});
+
 					posts.forEach(function (post) {
 
+						post.editable = ko.observable(false);
 						model.posts.push(post);
 
 					});
@@ -84,17 +119,21 @@
 			</header>
 
 			<div id="content">
+				<button data-bind="click: reorder, text: reorderButtonText"></button>
+
 				<section id="blogPosts" data-bind="foreach: posts">
 					<article id="blogPostTemplate">
 						<button data-bind="click: $root.drop">Drop</button>
 						<h2 class="blogPostTitle" data-bind="text: title"></h2>
 						<aside>
 							<span class="blogPostAuthor" data-bind="text: author"></span>
+							<span class="blogPostDate" data-bind="text: moment(date).format('DD/MM/YYYY HH:mm:ss')"></span>
 							<div class="blogPostRating" data-bind="foreach: new Array(stars)">
 								<img class="blogPostRatingStar" src="/images/star.png">
 							</div>
 						</aside>
-						<section class="blogPostBody" data-bind="text: body"></section>
+						<section class="blogPostBody" data-bind="css: { 'read-only': !editable },text: body, click: function() { $root.startEditingPost(this) }"></section>
+						<textarea class="blogPostBody" data-bind="css: { 'editable': editable },value: body, click: function() { $root.stopEditingPost(this) }"></textarea>
 						<h3>Comments</h3>
 						<section class="blogPostComments" data-bind="foreach: comments">
 							<span class="commentAuthor" data-bind="text: author"></span>
